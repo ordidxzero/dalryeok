@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "A TypeScript Calendar that focuses on performance and minimalism",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest --coverage",
     "build:core": "tsc && esbuild src/core/index.ts --bundle --minify --format=esm --outfile=dist/index.js"
   },
   "repository": {
@@ -21,7 +22,12 @@
   },
   "homepage": "https://github.com/ordidxzero/dalryeok#readme",
   "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.8",
     "esbuild": "^0.24.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
   }
 }
