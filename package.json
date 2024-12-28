@@ -4,7 +4,8 @@
   "description": "A TypeScript Calendar that focuses on performance and minimalism",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:state": "npm run build -workspaces --if-present"
   },
   "repository": {
     "type": "git",
