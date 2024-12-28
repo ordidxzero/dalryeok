@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/ordidxzero/dalryeok/issues"
   },
-  "homepage": "https://github.com/ordidxzero/dalryeok/tree/main/packages/state#readme"
+  "homepage": "https://github.com/ordidxzero/dalryeok/tree/main/packages/state#readme",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "jotai": "^2.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
 }
