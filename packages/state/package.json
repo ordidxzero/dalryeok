@@ -1,0 +1,19 @@
+{
+  "name": "@dalryeok/state",
+  "version": "0.0.1",
+  "description": "Scheduler state data structures for the Dalryeok scheduler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ordidxzero/dalryeok.git"
+  },
+  "author": "ordidxzero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ordidxzero/dalryeok/issues"
+  },
+  "homepage": "https://github.com/ordidxzero/dalryeok/tree/main/packages/state#readme"
+}
