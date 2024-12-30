@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import isLeapYear from 'dayjs/plugin/isLeapYear';
-import { DateTimeUnit } from './types';
+import { DateTimeUnit, WeekStartsOnType } from './types';
 
 dayjs.extend(utc);
 dayjs.extend(isLeapYear);
@@ -166,13 +166,37 @@ export class DateTime {
   }
 
   /**
-   * DateTime 인스턴스가 포함된 구간을 반환하는 기능을 제공합니다.
-   * @param unit - 구간을 나타내는 시간 단위
+   * DateTime 인스턴스가 포함된 week 구간을 반환하는 기능을 제공합니다.
+   * @param weekStartsOn - 시작하는 요일. 0이면 일요일, 1이면 월요일을 의미합니다.
    * @returns {DateTimeRange}
    */
-  range(unit: Extract<DateTimeUnit, 'weeks' | 'months' | 'years'>): DateTimeRange {
-    const startDate = new DateTime(this._view().startOf(unit).startOf('day'));
-    const endDate = new DateTime(this._view().endOf(unit).startOf('day'));
+  range(weekStartsOn: WeekStartsOnType = 0): DateTimeRange {
+    const day = this._view().day();
+    let date = this._view();
+
+    if (weekStartsOn === 1 && day === 0) {
+      date = date.add(-1, 'days');
+    }
+
+    let startDate = new DateTime(date.startOf('weeks').startOf('day'));
+    let endDate = new DateTime(date.endOf('weeks').startOf('day'));
+
+    if (weekStartsOn === 1) {
+      startDate = startDate.add(1, 'days');
+      endDate = endDate.add(1, 'days');
+    }
+
     return new DateTimeRange(startDate, endDate);
+  }
+
+  /**
+   * DateTime 인스턴스가 포함된 month 구간을 반환하는 기능을 제공합니다. 한 주를 DateTimeRange로 나타냅니다.
+   * @param weekStartsOn - 시작하는 요일. 0이면 일요일, 1이면 월요일을 의미합니다.
+   * @returns {Array<DateTimeRange>}
+   */
+  matrix(weekStartsOn: WeekStartsOnType = 0): Array<DateTimeRange> {
+    const date = this._view().startOf('months').startOf('day');
+
+    return Array.from({ length: 6 }, (_, i) => new DateTime(date.add(i, 'weeks')).range(weekStartsOn));
   }
 }

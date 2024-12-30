@@ -1,4 +1,4 @@
-import { atom, getDefaultStore, type PrimitiveAtom } from 'jotai/vanilla';
+import { atom, createStore, type PrimitiveAtom } from 'jotai/vanilla';
 import { Entry, EntryConfig } from './utils/event';
 import { DateTime, DateTimeRange } from './utils/date';
 
@@ -31,13 +31,13 @@ class EntryNode {
 }
 
 export class CalendarState {
-  private _store: ReturnType<typeof getDefaultStore>;
+  private _store: ReturnType<typeof createStore>;
   private _lookup: Map<string, PrimitiveAtom<Entry>>;
   private _node_lookup: Map<string, EntryNode>;
   private _root?: EntryNode;
   private _node?: EntryNode; // linked list를 구현하기 위해서 이전 노드를 저장해두는 변수
   constructor(entries: Array<EntryConfig> = []) {
-    this._store = getDefaultStore();
+    this._store = createStore();
     this._lookup = new Map();
     this._node_lookup = new Map();
 
